@@ -1,0 +1,55 @@
+﻿<Window x:Class="WormGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctl="clr-namespace:WormGame"
+        ResizeMode="NoResize"
+        WindowState="Normal"
+        mc:Ignorable="d"
+        Title="WormGame" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="BaseTextStyle">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextStyle}"></Style>
+
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextStyle}"
+               x:Key="ValueText">
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+    </Window.Resources>
+        <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Button Click="CmdCommand_Click" Content="{Binding CommandName}"
+                    IsEnabled="{Binding IsCommandEnabled}"/>
+            <Button Click="CmdNewGame_Click" IsEnabled="{Binding IsWaiting}">New Game</Button>
+            <Button Click="Button_Click">SaveResult</Button>
+            <Button Click="Button_Click_1">ShowResult</Button>
+            <TextBlock >Points:</TextBlock>
+            <TextBlock Style="{StaticResource ValueText}" Text="{Binding Points}"/>
+            <TextBlock>Life count:</TextBlock>
+            <TextBlock Style="{StaticResource ValueText}" Text="{Binding Lifes}"/>
+            <TextBlock>Time left:</TextBlock>
+            <TextBlock Style="{StaticResource ValueText}" Text="{Binding TimeLeft}"/>
+            <TextBlock>Speed:</TextBlock>
+            <TextBox Text="{Binding Speed}" IsEnabled="{Binding IsWaiting}"/>
+        </StackPanel>
+        <ctl:WormGameArea x:Name="gameArea" Background="LightSkyBlue"/>
+
+    </DockPanel>
+</Window>
